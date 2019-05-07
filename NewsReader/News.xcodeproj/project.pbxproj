@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8921BF1D22819794000A9AF5 /* ExtansionUIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8921BF1C22819794000A9AF5 /* ExtansionUIImageView.swift */; };
 		8992568322677FC4005D9579 /* NewsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8992568222677FC4005D9579 /* NewsRequest.swift */; };
 		89E62D3622666281008523E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E62D3522666281008523E4 /* AppDelegate.swift */; };
 		89E62D3822666281008523E4 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E62D3722666281008523E4 /* NewsViewController.swift */; };
@@ -19,8 +20,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8921BF1C22819794000A9AF5 /* ExtansionUIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtansionUIImageView.swift; sourceTree = "<group>"; };
 		8992568222677FC4005D9579 /* NewsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsRequest.swift; sourceTree = "<group>"; };
-		89E62D3222666281008523E4 /* NewsReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		89E62D3222666281008523E4 /* News.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = News.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89E62D3522666281008523E4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		89E62D3722666281008523E4 /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		89E62D3A22666281008523E4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -54,7 +56,7 @@
 		89E62D3322666281008523E4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				89E62D3222666281008523E4 /* NewsReader.app */,
+				89E62D3222666281008523E4 /* News.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -64,6 +66,7 @@
 			children = (
 				89E62D4722666355008523E4 /* CustomCell */,
 				89E62D3522666281008523E4 /* AppDelegate.swift */,
+				8921BF1C22819794000A9AF5 /* ExtansionUIImageView.swift */,
 				8992568222677FC4005D9579 /* NewsRequest.swift */,
 				89E62D4C2266857C008523E4 /* News.swift */,
 				89E62D3722666281008523E4 /* NewsViewController.swift */,
@@ -87,9 +90,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		89E62D3122666280008523E4 /* NewsReader */ = {
+		89E62D3122666280008523E4 /* News */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 89E62D4422666284008523E4 /* Build configuration list for PBXNativeTarget "NewsReader" */;
+			buildConfigurationList = 89E62D4422666284008523E4 /* Build configuration list for PBXNativeTarget "News" */;
 			buildPhases = (
 				89E62D2E22666280008523E4 /* Sources */,
 				89E62D2F22666280008523E4 /* Frameworks */,
@@ -99,9 +102,9 @@
 			);
 			dependencies = (
 			);
-			name = NewsReader;
+			name = News;
 			productName = NewsReader;
-			productReference = 89E62D3222666281008523E4 /* NewsReader.app */;
+			productReference = 89E62D3222666281008523E4 /* News.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -119,7 +122,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 89E62D2D22666280008523E4 /* Build configuration list for PBXProject "NewsReader" */;
+			buildConfigurationList = 89E62D2D22666280008523E4 /* Build configuration list for PBXProject "News" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -132,7 +135,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				89E62D3122666280008523E4 /* NewsReader */,
+				89E62D3122666280008523E4 /* News */,
 			);
 		};
 /* End PBXProject section */
@@ -156,6 +159,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8921BF1D22819794000A9AF5 /* ExtansionUIImageView.swift in Sources */,
 				89E62D3822666281008523E4 /* NewsViewController.swift in Sources */,
 				89E62D4A22666393008523E4 /* CustomCell.swift in Sources */,
 				8992568322677FC4005D9579 /* NewsRequest.swift in Sources */,
@@ -339,7 +343,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		89E62D2D22666280008523E4 /* Build configuration list for PBXProject "NewsReader" */ = {
+		89E62D2D22666280008523E4 /* Build configuration list for PBXProject "News" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				89E62D4222666284008523E4 /* Debug */,
@@ -348,7 +352,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		89E62D4422666284008523E4 /* Build configuration list for PBXNativeTarget "NewsReader" */ = {
+		89E62D4422666284008523E4 /* Build configuration list for PBXNativeTarget "News" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				89E62D4522666284008523E4 /* Debug */,

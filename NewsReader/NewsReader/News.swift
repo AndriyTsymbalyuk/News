@@ -13,11 +13,11 @@ struct News: Decodable {
     }
 struct Elements: Decodable {
     let source: SourceElements
-    let author: String?
     let title: String?
     let description: String?
     let url: String
     let publishedAt: String
+    let urlToImage: String
 }
 struct SourceElements: Decodable {
     let name: String

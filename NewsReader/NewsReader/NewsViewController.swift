@@ -10,10 +10,12 @@ import UIKit
 import SafariServices
 
 class NewsTableViewController: UITableViewController {
-
-var newsData = [News]()
+private var newsData = [News]()
+private var arrFilter = [News]()
+private var isSearch = false
 private let refresher = UIRefreshControl()
     
+    @IBOutlet weak var searchBar: UISearchBar!
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.refreshControl = refresher
@@ -31,56 +33,77 @@ private let refresher = UIRefreshControl()
         }
     }
 
-    func updateNews () {
+    private func updateNews () {
         NewsRequest.shared.newsRequest(complition: { (results:([News]?)) in
             if let dataOfNews = results {
-               let newdata = dataOfNews.sorted(by: { (news1, news2) -> Bool in
-                    news1.articles[0].publishedAt < news2.articles[0].publishedAt
-                })
-                print(dataOfNews[0].articles[0].publishedAt, newdata[0].articles[0].publishedAt)
-                self.newsData = newdata
-                
+                self.newsData = dataOfNews
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
             }
         }
     )}
-    
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return newsData.count
+    private func showWebsite(url: String) {
+        if let urlWebsite = URL(string: url) {
+            let webVC = SFSafariViewController(url: urlWebsite)
+            self.present(webVC, animated: true, completion: nil)
+        }
+    }
+    private func getFormatedDate(date_string:String,dateFormat:String)-> String{
         
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale.current
+        dateFormatter.dateFormat = dateFormat
+        
+        let dateFromInputString = dateFormatter.date(from: date_string)
+        dateFormatter.dateFormat = "HH:mm" // Here you can use any dateformate for output date
+        if(dateFromInputString != nil){
+            return dateFormatter.string(from: dateFromInputString!)
+        }
+        else{
+            debugPrint("could not convert date")
+            return "N/A"
+        }
+    }
+
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return isSearch ? arrFilter.count : newsData.count
+
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return newsData[0].articles.count
+        return  isSearch ? arrFilter[0].articles.count : newsData[0].articles.count
         
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? CustomCell {
-            let newsObject = newsData[0].articles[indexPath.row]
-            cell.authorLabel.text = newsObject.author
+            let dataArr = isSearch ? arrFilter : newsData
+            cell.accessoryType = .detailDisclosureButton
+            let newsObject = dataArr[0].articles[indexPath.row]
+            cell.urlToImage.downloaded(from: newsObject.urlToImage)
             cell.sourceLabel.text = newsObject.source.name
-            cell.titleLabel.text = newsObject.publishedAt
+            cell.titleLabel.text = newsObject.title
             cell.descriptionLabel.text = newsObject.description
+            cell.publishedLabel.text = getFormatedDate(date_string: newsObject.publishedAt, dateFormat: "yyyy-MM-dd'T'HH:mm:ssZ") 
             return cell
         }
 return UITableViewCell()
 }
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
+    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         let newsObject = newsData[0].articles[indexPath.row]
         let url = newsObject.url
         showWebsite(url: url)
-    }
-    func showWebsite(url: String) {
-        if let urlWebsite = URL(string: url) {
-        let webVC = SFSafariViewController(url: urlWebsite)
-        self.present(webVC, animated: true, completion: nil)
-    }
+        
+        
     }
     
     
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let newsObject = newsData[0].articles[indexPath.row]
+//        let url = newsObject.url
+//        showWebsite(url: url)
+//    }
 }
 
 extension NewsTableViewController: SFSafariViewControllerDelegate {
@@ -89,3 +112,18 @@ extension NewsTableViewController: SFSafariViewControllerDelegate {
     }
     
 }
+
+extension NewsTableViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            isSearch = false
+        }else {
+            arrFilter = newsData.filter({ (news) -> Bool in
+                guard let text = searchBar.text else  {return false}
+                return (news.articles[0].description?.contains(text))!
+            })
+        tableView.reloadData()
+        }
+    }
+}
+
